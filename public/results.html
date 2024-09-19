@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Results</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Congratulations!</h1>
+    
+    <div id="result-container"></div>
+    
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const winner = urlParams.get('winner');
+        const votes = JSON.parse(urlParams.get('votes'));
+
+        const resultContainer = document.getElementById('result-container');
+        resultContainer.innerHTML = `
+            <h2>The winning animal is: ${winner}</h2>
+            <img src="${winner}.jpg" alt="${winner}">
+            <p>Votes: shikamaru - ${votes.image1}, kurama the cat - ${votes.image2}</p>
+        `;
+    </script>
+
+</body>
+</html>

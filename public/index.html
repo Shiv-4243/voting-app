@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote for Your Favorite animal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Vote for Your Favorite animal!</h1>
+    
+    <div>
+        <img src="image1.jpg" alt="shikamaru" id="image1">
+        <button onclick="vote('image1')">Vote for shikamaru</button>
+    </div>
+    <div>
+        <img src="image2.jpg" alt="kurama the cat" id="image2">
+        <button onclick="vote('image2')">Vote for kurama the cat</button>
+    </div>
+    
+    <h2 id="result"></h2>
+
+    <script>
+        async function vote(imageId) {
+            const response = await fetch(`/vote/${imageId}`, { method: 'POST' });
+            const result = await response.json();
+
+            if (result.winner) {
+                // Redirect to results page
+                window.location.href = `/results.html?winner=${result.winner}&votes=${JSON.stringify(result.votes)}`;
+            } else {
+                document.getElementById('result').innerText = result.message;
+            }
+        }
+    </script>
+
+</body>
+</html>
